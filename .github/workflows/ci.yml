@@ -26,14 +26,15 @@ jobs:
 
       - run: npm ci
 
+      - name: Build component (Stencil)
+        run: npm run build
+
+      # Needs the build output: .storybook/preview.ts imports dist/components.
       - name: Type-check (TypeScript strict)
         run: npm run typecheck
 
       - name: Token contrast guard (WCAG)
         run: npm run check:contrast
-
-      - name: Build component (Stencil)
-        run: npm run build
 
       - name: Build Storybook (static)
         run: npm run storybook:build
