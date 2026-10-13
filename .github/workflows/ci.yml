@@ -1,0 +1,59 @@
+name: quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Type-check (TypeScript strict)
+        run: npm run typecheck
+
+      - name: Token contrast guard (WCAG)
+        run: npm run check:contrast
+
+      - name: Build component (Stencil)
+        run: npm run build
+
+      - name: Build Storybook (static)
+        run: npm run storybook:build
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      # `storybook` project: every story renders, runs its `play`, then axe (addon-a11y, test: 'error').
+      # `smoke` project: tab order with real key events, plus one screenshot per story.
+      - name: Stories (play + axe) and smoke (tab order, screenshots)
+        run: npx vitest run
+
+      # Visual smoke for human review. Not a regression gate: there are no baselines and nothing is diffed.
+      - name: Upload story screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-smoke-screenshots
+          path: |
+            screenshots/
+            .vitest/attachments/
+          if-no-files-found: ignore
+          retention-days: 14
