@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>post-banner in plain HTML</title>
+    <!--
+      No framework, no build step on this page. Run `npm run build`, then `npm run example`.
+      1. The token stylesheet (primitive + semantic layers) comes from the build.
+      2. The lazy loader registers <post-banner>.
+    -->
+    <link rel="stylesheet" href="../../dist/post-banner/post-banner.css" />
+    <script type="module" src="../../dist/post-banner/post-banner.esm.js"></script>
+    <style>
+      body { background: #fff; color: #1f1f1f; font-family: system-ui, sans-serif; margin: 0 auto; max-inline-size: 40rem; padding: 1.5rem 1rem; }
+      .stack { display: grid; gap: 1rem; }
+      pre { background: #f4f4f4; padding: 0.75rem; overflow: auto; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>post-banner in plain HTML</h1>
+      <p>This page proves the component is consumable outside Stencil and Storybook.</p>
+
+      <div class="stack">
+        <post-banner variant="info" cta-label="View details" cta-href="#details">
+          <span slot="title">Information</span>
+          Your request is being processed.
+        </post-banner>
+
+        <post-banner variant="warning" dismissible close-label="Close" cta-label="Review settings">
+          <span slot="title">Action required soon</span>
+          Update your preferences before the deadline.
+        </post-banner>
+
+        <post-banner variant="success" dismissible id="saved">
+          <span slot="title">Changes saved</span>
+          Your changes have been applied.
+        </post-banner>
+
+        <post-banner variant="error" announce="alert" cta-label="Try again">
+          <span slot="title">Sending failed</span>
+          An error prevented your request from being completed.
+        </post-banner>
+      </div>
+
+      <h2 id="next-section" tabindex="-1">Next section</h2>
+      <p>
+        Events bubble and are composed, so plain <code>addEventListener</code> works. The banner never moves focus
+        by itself; here the page does, after "Changes saved" is closed.
+      </p>
+      <pre id="log" aria-live="off">Events will be logged here.</pre>
+      <button type="button" id="reopen">Reopen "Changes saved"</button>
+    </main>
+
+    <script>
+      const log = document.getElementById('log');
+      const write = (line) => { log.textContent = line + '\n' + (log.textContent === 'Events will be logged here.' ? '' : log.textContent); };
+
+      document.addEventListener('postBannerCta', (event) => write('postBannerCta ' + JSON.stringify(event.detail)));
+      document.addEventListener('postBannerDismiss', (event) => {
+        write('postBannerDismiss ' + JSON.stringify(event.detail));
+        if (event.target.id === 'saved') document.getElementById('next-section').focus();
+      });
+      document.getElementById('reopen').addEventListener('click', () => { document.getElementById('saved').open = true; });
+    </script>
+  </body>
+</html>
