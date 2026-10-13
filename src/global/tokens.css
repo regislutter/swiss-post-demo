@@ -1,0 +1,50 @@
+/*
+ * Design tokens, three layers: primitive -> semantic -> component.
+ *
+ * 1. Primitives: raw values, never consumed by components directly.
+ * 2. Semantic:   product intent (feedback colours, focus ring). Re-theme here.
+ * 3. Component:  --post-banner-* live in banner.css (:host), resolved from the semantic layer.
+ */
+
+/* Primitives */
+:root {
+  --post-color-white: #ffffff;
+  --post-color-black: #1f1f1f;
+  --post-color-blue-50: #eaf3ff;
+  --post-color-blue-800: #003b73;
+  --post-color-blue-600: #005eb8;
+  --post-color-yellow-50: #fff8d9;
+  --post-color-yellow-900: #4b3b00;
+  --post-color-green-50: #e9f7ef;
+  --post-color-green-800: #075c35;
+  --post-color-red-50: #fff0f0;
+  --post-color-red-800: #8e1515;
+
+  --post-space-2: 0.5rem;
+  --post-space-3: 0.75rem;
+  --post-space-4: 1rem;
+  --post-space-6: 1.5rem;
+  --post-radius-2: 0.5rem;
+
+  --post-font-family: system-ui, sans-serif;
+  --post-font-size-0: 0.875rem;
+  --post-font-size-1: 1rem;
+  --post-font-weight-semibold: 600;
+}
+
+/* Semantic */
+:root {
+  --post-feedback-info-background: var(--post-color-blue-50);
+  --post-feedback-info-foreground: var(--post-color-blue-800);
+  --post-feedback-info-accent: var(--post-color-blue-800);
+  --post-feedback-warning-background: var(--post-color-yellow-50);
+  --post-feedback-warning-foreground: var(--post-color-yellow-900);
+  --post-feedback-warning-accent: var(--post-color-yellow-900);
+  --post-feedback-success-background: var(--post-color-green-50);
+  --post-feedback-success-foreground: var(--post-color-green-800);
+  --post-feedback-success-accent: var(--post-color-green-800);
+  --post-feedback-error-background: var(--post-color-red-50);
+  --post-feedback-error-foreground: var(--post-color-red-800);
+  --post-feedback-error-accent: var(--post-color-red-800);
+  --post-focus-ring: var(--post-color-blue-600);
+}

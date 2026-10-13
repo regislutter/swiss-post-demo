@@ -1,0 +1,20 @@
+/*
+ * Alternative theme: remaps ONLY the semantic layer, scoped to [data-theme='alt'].
+ * The component is untouched; this is the point of the semantic layer.
+ * Every pair below is validated by `npm run check:contrast`.
+ */
+[data-theme='alt'] {
+  --post-feedback-info-background: #f3eefc;
+  --post-feedback-info-foreground: #3b1a78;
+  --post-feedback-info-accent: #3b1a78;
+  --post-feedback-warning-background: #fff1e0;
+  --post-feedback-warning-foreground: #6b3200;
+  --post-feedback-warning-accent: #6b3200;
+  --post-feedback-success-background: #e3f6f3;
+  --post-feedback-success-foreground: #00514a;
+  --post-feedback-success-accent: #00514a;
+  --post-feedback-error-background: #fdeaf1;
+  --post-feedback-error-foreground: #7a0e3a;
+  --post-feedback-error-accent: #7a0e3a;
+  --post-focus-ring: #6a1b9a;
+}

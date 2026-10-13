@@ -1,0 +1,137 @@
+/*
+ * Component token layer: --post-banner-* are resolved here, from the semantic layer, with safe fallbacks.
+ * A consumer can override them on the element itself (`post-banner { --post-banner-background: ... }`):
+ * outer-scope declarations beat :host, so the override applies to every variant of that element, by design.
+ * To re-theme a variant everywhere, override the semantic --post-feedback-* tokens instead.
+ *
+ * Class names are prefixed `swisspost:`; the colon must be escaped in selectors (`.swisspost\:banner`).
+ */
+:host {
+  --post-banner-background: var(--post-feedback-info-background, #eaf3ff);
+  --post-banner-foreground: var(--post-feedback-info-foreground, #003b73);
+  --post-banner-accent: var(--post-feedback-info-accent, #003b73);
+  --post-banner-padding-block: var(--post-space-4, 1rem);
+  --post-banner-padding-inline: var(--post-space-6, 1.5rem);
+  --post-banner-gap: var(--post-space-3, 0.75rem);
+  --post-banner-radius: var(--post-radius-2, 0.5rem);
+  display: block;
+}
+
+/* An author `display` on :host would otherwise defeat the UA [hidden] rule. */
+:host([hidden]) {
+  display: none;
+}
+
+:host([data-variant='warning']) {
+  --post-banner-background: var(--post-feedback-warning-background, #fff8d9);
+  --post-banner-foreground: var(--post-feedback-warning-foreground, #4b3b00);
+  --post-banner-accent: var(--post-feedback-warning-accent, #4b3b00);
+}
+
+:host([data-variant='success']) {
+  --post-banner-background: var(--post-feedback-success-background, #e9f7ef);
+  --post-banner-foreground: var(--post-feedback-success-foreground, #075c35);
+  --post-banner-accent: var(--post-feedback-success-accent, #075c35);
+}
+
+:host([data-variant='error']) {
+  --post-banner-background: var(--post-feedback-error-background, #fff0f0);
+  --post-banner-foreground: var(--post-feedback-error-foreground, #8e1515);
+  --post-banner-accent: var(--post-feedback-error-accent, #8e1515);
+}
+
+.swisspost\:banner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--post-banner-gap);
+  align-items: start;
+  padding: var(--post-banner-padding-block) var(--post-banner-padding-inline);
+  color: var(--post-banner-foreground);
+  background: var(--post-banner-background);
+  border-inline-start: 0.25rem solid var(--post-banner-accent);
+  border-radius: var(--post-banner-radius);
+  font: 400 var(--post-font-size-1, 1rem) / 1.5 var(--post-font-family, system-ui, sans-serif);
+  overflow-wrap: anywhere;
+}
+
+/* The variant glyph differs per variant, so the message never relies on colour alone. */
+.swisspost\:icon {
+  display: grid;
+  place-items: center;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border: 0.125rem solid currentColor;
+  border-radius: 50%;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.swisspost\:title {
+  margin: 0;
+  font-size: var(--post-font-size-1, 1rem);
+  font-weight: var(--post-font-weight-semibold, 600);
+}
+
+.swisspost\:description {
+  margin-block-start: 0.25rem;
+}
+
+.swisspost\:actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--post-space-3, 0.75rem);
+  align-items: center;
+  margin-block-start: 0.75rem;
+}
+
+/* `display: flex` above would otherwise defeat the UA [hidden] rule on an empty actions row. */
+.swisspost\:actions[hidden] {
+  display: none;
+}
+
+.swisspost\:cta {
+  color: var(--post-banner-foreground);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  text-align: start;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+}
+
+.swisspost\:cta:hover {
+  text-decoration-thickness: 0.15em;
+}
+
+/* Minimum 2rem hit area (WCAG 2.2 target size, 2.5.8). */
+.swisspost\:close {
+  display: grid;
+  place-items: center;
+  min-inline-size: 2rem;
+  min-block-size: 2rem;
+  margin: -0.25rem;
+  padding: 0.25rem;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.swisspost\:cta:focus-visible,
+.swisspost\:close:focus-visible {
+  outline: 0.1875rem solid var(--post-focus-ring, #005eb8);
+  outline-offset: 0.1875rem;
+  border-radius: 0.25rem;
+}
+
+/* Keep three columns on small screens (a two-column fallback would stack the close button over the title). */
+@media (max-width: 36rem) {
+  :host {
+    --post-banner-padding-inline: var(--post-space-4, 1rem);
+  }
+}
