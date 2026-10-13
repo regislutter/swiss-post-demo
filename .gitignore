@@ -1,0 +1,16 @@
+node_modules/
+dist/
+loader/
+www/
+.stencil/
+storybook-static/
+screenshots/
+test-results/
+coverage/
+*.log
+.DS_Store
+.env
+.env.*
+.vitest/
+__screenshots__/
+.claude/
