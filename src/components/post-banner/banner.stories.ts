@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html, nothing, type TemplateResult } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { expect, fn, userEvent, waitFor, within, type Mock } from 'storybook/test';
-import { findByShadowRole, queryByShadowRole } from 'shadow-dom-testing-library';
+import { findAllByShadowRole, findByShadowRole, queryByShadowRole } from 'shadow-dom-testing-library';
 import type { PostBannerAnnounce, PostBannerHeadingLevel, PostBannerVariant } from './types';
 
 /**
@@ -89,6 +89,17 @@ const getHost = (canvasElement: HTMLElement): BannerHost => {
 
 const detailOf = (mock: Mock | undefined, call = 0): unknown => (mock?.mock.calls[call]?.[0] as CustomEvent | undefined)?.detail;
 
+/**
+ * The close button, found by role and its visible glyph rather than by accessible name: the behaviour stories
+ * must not depend on the label, which axe (`button-name`) and the tab-order smoke test already audit.
+ */
+const findCloseButton = async (host: HTMLElement): Promise<HTMLElement> => {
+  const buttons = await findAllByShadowRole(host, 'button');
+  const close = buttons.find((button) => button.textContent?.trim() === '×');
+  if (!close) throw new Error('No close button (role=button, text "×") in <post-banner>');
+  return close;
+};
+
 /** Every rendered class carries the `swisspost:` prefix (library convention). */
 const expectPrefixedClasses = (host: HTMLElement): void => {
   const classes = Array.from(host.shadowRoot?.querySelectorAll('[class]') ?? []).flatMap((el) => Array.from(el.classList));
@@ -132,7 +143,7 @@ export const WarningDismissible: Story = {
   args: { variant: 'warning', dismissible: true, title: 'Action required soon', description: 'Update your preferences before the deadline.' },
   play: async ({ canvasElement, args }) => {
     const host = getHost(canvasElement);
-    const close = await findByShadowRole(host, 'button', { name: 'Close' });
+    const close = await findCloseButton(host);
     await expect(close).toBeVisible();
 
     // Focus is on the real inner button (document.activeElement alone would only report the host).
@@ -262,7 +273,7 @@ export const Reopen: Story = {
   `,
   play: async ({ canvasElement }) => {
     const host = getHost(canvasElement);
-    const close = await findByShadowRole(host, 'button', { name: 'Close' });
+    const close = await findCloseButton(host);
 
     // Space activates a native button just as Enter does.
     close.focus();
@@ -271,7 +282,7 @@ export const Reopen: Story = {
 
     await userEvent.click(within(canvasElement).getByRole('button', { name: 'Reopen the banner' }));
     await waitFor(() => expect(host).toBeVisible());
-    await findByShadowRole(host, 'button', { name: 'Close' });
+    await findCloseButton(host);
   },
 };
 
@@ -290,7 +301,7 @@ export const DismissWithFocusReturn: Story = {
   `,
   play: async ({ canvasElement, args }) => {
     const host = getHost(canvasElement);
-    const close = await findByShadowRole(host, 'button', { name: 'Close' });
+    const close = await findCloseButton(host);
     await userEvent.click(close);
 
     const next = within(canvasElement).getByRole('heading', { name: 'Next section' });
