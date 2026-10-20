@@ -136,7 +136,7 @@ export const Warning: Story = {
     ctaLabel: 'Review preferences',
   },
   // CTA first, close button last: DOM order is the tab order.
-  parameters: { tabOrder: ['Review preferences', 'Close'] },
+  parameters: { tabOrder: ['Review preferences', '×'] },
 };
 
 export const WarningDismissible: Story = {
@@ -162,7 +162,7 @@ export const WarningDismissible: Story = {
 
 export const Success: Story = {
   args: { variant: 'success', dismissible: true, title: 'Changes saved', description: 'Your changes have been applied.' },
-  parameters: { tabOrder: ['Close'] },
+  parameters: { tabOrder: ['×'] },
 };
 
 export const ErrorUrgent: Story = {
@@ -190,7 +190,7 @@ export const ErrorUrgent: Story = {
 
 export const SlottedActions: Story = {
   args: { dismissible: true, title: 'Two choices available', description: 'The actions slot supports richer business cases.' },
-  parameters: { tabOrder: ['Accept', 'Later', 'Close'] },
+  parameters: { tabOrder: ['Accept', 'Later', '×'] },
   render: (args) => html`
     <post-banner variant=${args.variant} ?dismissible=${args.dismissible}>
       <span slot="title">${args.title}</span>
@@ -243,7 +243,7 @@ const renderMatrix = (args: BannerArgs): TemplateResult => html`
   </div>
 `;
 
-const MATRIX_TAB_ORDER = MATRIX.flatMap((entry) => [entry.ctaLabel as string, 'Close']);
+const MATRIX_TAB_ORDER = MATRIX.flatMap((entry) => [entry.ctaLabel as string, '×']);
 
 export const AllVariants: Story = {
   render: renderMatrix,
