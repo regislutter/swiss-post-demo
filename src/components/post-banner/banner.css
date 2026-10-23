@@ -49,7 +49,8 @@
   color: var(--post-banner-foreground);
   background: var(--post-banner-background);
   border-inline-start: 0.25rem solid var(--post-banner-accent);
-  border-radius: var(--post-banner-radius);
+  border-top-right-radius: var(--post-banner-radius);
+  border-bottom-right-radius: var(--post-banner-radius);
   font: 400 var(--post-font-size-1, 1rem) / 1.5 var(--post-font-family, system-ui, sans-serif);
   overflow-wrap: anywhere;
 }
