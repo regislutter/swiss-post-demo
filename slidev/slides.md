@@ -376,9 +376,21 @@ layout: two-cols-header
 
 ::left::
 
-<<< @/react-components/button-example.tsx tsx {class: 'max-h-50 max-w-100 overflow-auto'}
+``` tsx {all|5|6|all} twoslash
+import { React } from 'react';
+import { Button } from './react-components/button';
+  
+function ButtonExample() {
+    return (<Button alignItems="center" 
+    //              ^?
+        spacing={{ base: 2, md: 4, lg: 6 }}>Test</Button>);
+    //  ^?
+}
 
-<<< @/react-components/button.tsx tsx {class: 'max-h-50 max-w-100 overflow-auto'}
+export default ButtonExample;
+```
+
+<<< @/react-components/button.tsx tsx {class: 'max-h-40 max-w-100 overflow-auto'}
 
 ::right::
 
