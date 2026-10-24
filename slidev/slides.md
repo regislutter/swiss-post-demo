@@ -37,7 +37,7 @@ Spectra — tokens, composants, packages, documentation, validation et adoption.
 layout: center
 ---
 
-# Spectra
+# **Spectra**
 
 Spectra is Vusion’s Design System: a React-based foundation built from scratch with governed tokens and slots, reusable packages, automated validation, and measured adoption.
 
@@ -65,7 +65,7 @@ For Vusion, this matters beyond aesthetics. Our products help people make sense 
 
 # A Design System at scale is a **socio-technical system**
 
-<div class="grid mt-8">
+<div class="grid">
 <div class="card"><h3>01 · Design</h3><p>Primitives, accessible, composable.</p></div>
 <div class="card"><h3>02 · Contracts</h3><p>Tokens, props, slots, events, states.</p></div>
 <div class="card"><h3>03 · Validation</h3><p>Stories, interaction, a11y, visual, CI.</p></div>
@@ -95,7 +95,7 @@ Monitor adoption and get feedback to reduce friction
 
 # Establish design principles
 
-<div class="grid mt-8">
+<div class="grid">
 <div class="card"><h3>Serve the user, not the screen</h3><p>Optimize clarity, speed and confidence.</p></div>
 <div class="card"><h3>Personality lives in the system</h3><p>Visual identity through color palette, icons, typography and spatial rhythm.</p></div>
 <div class="card"><h3>Constraints are the product</h3><p>Work with the system, not around it.</p></div>
@@ -153,7 +153,7 @@ flowchart LR
 
 # Ground rules
  
-<div class="mt-4 mb-4">
+<div class="mb-4">
 <ul>
     <li>Ticket first, tracked in Jira (new Project and Kanban board).</li>
     <li>Exploration is allowed - modification is not (in Figma).</li>
@@ -213,7 +213,7 @@ Wait for Design to be finished. Then review made by the design system developers
 
 # Build a shared language
 
-<div class="grid mt-5">
+<div class="grid">
     <div class="card">
     <h3 class="mb-2">Domain-Driven Design</h3>
     <ul>
@@ -258,7 +258,7 @@ Stay implicit: focus, hover, onValueChange, etc.
 
 # Contracts before pixels
 
-<div class="grid mt-6">
+<div class="grid">
 <div class="card"><h3 class="mb-2">Questions for each component</h3>
 <ul>
 <li>What are the real states?</li><li>Which props are essential?</li><li>Which values should become tokens?</li><li>Which structure remains governed?</li><li>Where should composition happen?</li>
@@ -376,9 +376,21 @@ layout: two-cols-header
 
 ::left::
 
-<<< @/react-components/button-example.tsx tsx {class: 'max-h-50 max-w-100 overflow-auto'}
+``` tsx {all|5|6|all} twoslash
+import { React } from 'react';
+import { Button } from './react-components/button';
+  
+function ButtonExample() {
+    return (<Button alignItems="center" 
+    //              ^?
+        spacing={{ base: 2, md: 4, lg: 6 }}>Test</Button>);
+    //  ^?
+}
 
-<<< @/react-components/button.tsx tsx {class: 'max-h-50 max-w-100 overflow-auto'}
+export default ButtonExample;
+```
+
+<<< @/react-components/button.tsx tsx {class: 'max-h-40 max-w-100 overflow-auto'}
 
 ::right::
 
@@ -399,7 +411,7 @@ flowchart LR
  U --> C[Consumer apps]
 ```
 
-<div class="grid mt-5 small">
+<div class="grid mt-6">
 <div><strong>pnpm</strong>: efficient workspace.</div><div><strong>Turborepo</strong>: dependencies graph, parallelism, cache.</div>
 <div><strong>Modular packages</strong>: clear boundaries, targeted consumption.</div><div><strong>Umbrella package</strong>: unified experience.</div>
 </div>
@@ -441,7 +453,7 @@ flowchart LR
  E --> F[Human QA<br/>in product context]
 ```
 
-<div class="grid mt-4 small">
+<div class="grid mt-4">
 <div><strong>Vitest unit tests</strong> catches logic at the cheapest possible cost, before a browser is even open.</div>
 <div><strong>Storybook interactions</strong> lock the behaviors users actually feel, not just the markup we wrote.</div>
 <div><strong>Chromatic visual diffs</strong> surface the regressions no type system can express.</div>
@@ -466,25 +478,24 @@ QA - puts the component back in its product context.
 
 # Team guardrails, including AI
 
-<div class="grid mt-5">
+<div class="grid">
 <div>
-<h3>Engineering</h3>
-<ul class="small">
+<h3 class="mb-2">Engineering</h3>
+<ul>
 <li><strong>Git hooks</strong> enforce commit conventions and a minimum local signal before a PR is even opened.</li>
 <li><strong>Renovate</strong> keeps dependencies current, grouped, and reviewable — no silent drift in the lockfile.</li>
 <li><strong>PR verification</strong> requires architecture review, contract sign-off, and a passing pipeline before merge.</li>
 </ul>
 </div>
 <div>
-<h3>AI as an extra reviewer</h3>
-<ul class="small">
+<h3 class="mb-2">AI as an extra reviewer</h3>
+<ul>
 <li><strong>Cursor Bugbot</strong> reads the diff like a reviewer would: catching regressions, risky patterns, and contract drift.</li>
 <li><strong>Agent skills</strong> handle the mechanical work — scaffolding, refactors, migrations — so engineers focus on design.</li>
+<li><strong>Human governance</strong>: AI accelerates routine work and narrows area of small mistakes. It does not own the contract or architecture. The team remains accountable.</li>
 </ul>
 </div>
 </div>
-
-<div class="mt-8 card"><h3>Human governance, on purpose</h3><p>AI narrows the surface area of small mistakes and accelerates routine work. It does not own the contract, the architecture, or the user — and the team remains accountable for each of them.</p></div>
 
 <!--
 
@@ -508,9 +519,10 @@ AI reviews
 -->
 
 ---
-layout: image-right
+layout: two-cols-header
 image: /public/design-system-adoption.png
 backgroundSize: contain
+class: px-4
 ---
 
 <div class="kicker">ACT 4 · GOVERNANCE</div>
@@ -526,14 +538,21 @@ flowchart LR
  Q -. feedback .-> I
 ```
 
-<div class="grid mt-5 small">
+<div class="mb-4"></div>
+
+:: left ::
+
+<div class="grid mt-4">
 
 <div><strong>The CI script counts</strong><br>new components · older components · <code>classNames</code> · <code>style</code> arbitrary overrides</div>
-<div><strong>Vusion rollout indicators</strong><br>app coverage · active versions · a11y violations · token usage · publication → adoption lead time · overrides · pre-production regressions.</div>
 <div><strong>Usage analytics</strong> surface real adoption friction back into the roadmap.</div>
 </div>
 
-<blockquote class="mt-5">A rollout is successful when teams adopt without losing speed and exceptions are visible.</blockquote>
+<blockquote class="mt-4">A rollout is successful when teams adopt without losing speed and exceptions are visible.</blockquote>
+
+:: right ::
+
+<img src="/public/design-system-adoption.png" width="100%" />
 
 <!-- Notes : Emphasize QA and peer QA, not just automation. Adoption is a Design System metric just like code quality. -->
 
@@ -543,13 +562,13 @@ flowchart LR
 
 # Governance is a reliability feature
 
-<div class="grid mt-5 small">
-<div class="card"><h3>1 · Ownership</h3><p>A platform owner, a roadmap, and a compatibility policy.</p></div>
-<div class="card"><h3>2 · Representation</h3><p>Product teams contribute feedback, use cases and prioritization.</p></div>
-<div class="card"><h3>3 · Versioning</h3><p>Compatible changes, deprecations and release notes.</p></div>
-<div class="card"><h3>4 · Accessibility</h3><p>Automation, audits and real user journeys.</p></div>
-<div class="card"><h3>5 · Traceability</h3><p>Documented decisions, exceptions and evidence for important changes.</p></div>
-<div class="card"><h3>6 · Adoption</h3><p>Coverage, active versions, overrides and regressions.</p></div>
+<div class="grid">
+<div class="card"><h3>1 · Ownership</h3><p class="small">A platform owner, a roadmap, and a compatibility policy.</p></div>
+<div class="card"><h3>2 · Representation</h3><p class="small">Product teams contribute feedback, use cases and prioritization.</p></div>
+<div class="card"><h3>3 · Versioning</h3><p class="small">Compatible changes, deprecations and release notes.</p></div>
+<div class="card"><h3>4 · Accessibility</h3><p class="small">Automation, audits and real user journeys.</p></div>
+<div class="card"><h3>5 · Traceability</h3><p class="small">Documented decisions, exceptions and evidence for important changes.</p></div>
+<div class="card"><h3>6 · Adoption</h3><p class="small">Coverage, active versions, overrides and regressions.</p></div>
 </div>
 
 <!-- Notes : Keep this grounded in Vusion. Governance should protect autonomy rather than centralize every decision: the platform team owns invariants, while product teams bring context and evidence.
