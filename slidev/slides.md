@@ -339,13 +339,14 @@ If there is a rendering issue in a consumer app, it's probably the component at 
 
 # Explicit, typed, composable
 
-<div class="grid mt-5">
+<div class="grid mt-4">
 <div>
 <h3 class="mb-2">Spectra principles</h3>
 <ul>
 <li>Generic props and constrained responsive behavior.</li>
 <li>No className or style allowed.</li>
 <li>Generic props and types + responsive classes generators.</li>
+<li>Compound components.</li>
 </ul>
 </div>
 <div>
@@ -356,7 +357,7 @@ If there is a rendering issue in a consumer app, it's probably the component at 
 </div>
 </div>
 
-<blockquote class="mt-5">We are not trying to ban all customization. We want to make it a named, typed, documented capability.</blockquote>
+<blockquote class="mt-4">We are not trying to ban all customization. We want to make it a named, typed, documented capability.</blockquote>
 
 <!--
 
@@ -447,14 +448,14 @@ Radix doesn't provide every accessibility solution, we still have to validate fo
 ```mermaid
 flowchart LR
  A[Local dev<br/>Typecheck · lint · build] --> X[Vitest unit tests] --> B[Storybook<br/>interaction tests]
- B --> C[Automated a11y<br/>axe / rules]
+ B --> C[Automated a11y<br/>axe · rules · addon-a11y]
  C --> D[Chromatic<br/>visual diffs]
  D --> E[CI gate<br/>Snapshots]
  E --> F[Human QA<br/>in product context]
 ```
 
 <div class="grid mt-4">
-<div><strong>Vitest unit tests</strong> catches logic at the cheapest possible cost, before a browser is even open.</div>
+<div><strong>Vitest unit tests + React Testing Library</strong> catches logic at the cheapest possible cost, before a browser is even open.</div>
 <div><strong>Storybook interactions</strong> lock the behaviors users actually feel, not just the markup we wrote.</div>
 <div><strong>Chromatic visual diffs</strong> surface the regressions no type system can express.</div>
 <div><strong>Snapshots and automated a11y audits</strong> enforce the promise the design tokens made.</div>
@@ -565,7 +566,7 @@ flowchart LR
 <div class="grid">
 <div class="card"><h3>1 · Ownership</h3><p class="small">A platform owner, a roadmap, and a compatibility policy.</p></div>
 <div class="card"><h3>2 · Representation</h3><p class="small">Product teams contribute feedback, use cases and prioritization.</p></div>
-<div class="card"><h3>3 · Versioning</h3><p class="small">Compatible changes, deprecations and release notes.</p></div>
+<div class="card"><h3>3 · Versioning</h3><p class="small">Compatible changes, deprecations and release notes. (Semantic Versioning)</p></div>
 <div class="card"><h3>4 · Accessibility</h3><p class="small">Automation, audits and real user journeys.</p></div>
 <div class="card"><h3>5 · Traceability</h3><p class="small">Documented decisions, exceptions and evidence for important changes.</p></div>
 <div class="card"><h3>6 · Adoption</h3><p class="small">Coverage, active versions, overrides and regressions.</p></div>
