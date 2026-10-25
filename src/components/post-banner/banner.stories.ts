@@ -128,7 +128,7 @@ export const Warning: Story = {
   parameters: { tabOrder: ['Review preferences', 'Close'] },
 };
 
-export const WarningDismissible: Story = {
+export const WarningDismissed: Story = {
   args: { variant: 'warning', dismissible: true, title: 'Action required soon', description: 'Update your preferences before the deadline.' },
   play: async ({ canvasElement, args }) => {
     const host = getHost(canvasElement);
