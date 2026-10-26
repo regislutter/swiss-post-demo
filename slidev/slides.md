@@ -26,13 +26,6 @@ layout: intro
   <span class="badge">Design System Lead</span><span class="tag">Spectra @ Vusion</span>
 </div>
 
-<!--
-Speed creates value only if it's reliable.
-It's not about how to code a button, but how to make it used by dozens of developers across multiple teams. And that, without depending on a single person.
-
-Spectra — tokens, composants, packages, documentation, validation et adoption.
--->
-
 ---
 layout: center
 ---
@@ -40,6 +33,13 @@ layout: center
 # **Spectra**
 
 Spectra is Vusion’s Design System: a React-based foundation built from scratch with governed tokens and slots, reusable packages, automated validation, and measured adoption.
+
+<!--
+Speed creates value only if it's reliable.
+It's not about how to code a button, but how to make it used by dozens of developers across multiple teams. And that, without depending on a single person.
+
+Spectra — tokens, composants, packages, documentation, validation et adoption.
+-->
 
 ---
 layout: statement
@@ -50,13 +50,21 @@ layout: statement
 [A design system is] a set of <span v-mark.yellow>connected patterns and shared practices</span>, coherently organized to serve the purposes of a digital product. - Alla Kholmatova
 
 <!--
+
+from Alla Kholmatova
+A set of **connected patterns and shared practices**, coherently organized to serve the purposes of a digital product.
+
 Building SaaS products at scale creates a silent problem: inconsistency compounds over time.
 
-Without a shared system, designers make slightly different decisions on every screen. Developers implement slightly different components in every feature. The result is an interface that feels fragmented, and a team that spends more time reconciling differences than shipping value.
+Without a shared system
+=> Designer make slightly different decisions on every screen
+=> Developers implement slightly different components in every feature
+== result Fragmented interface
 
-A Design System solves this by creating one shared language between design and development — a single source of truth that answers "how should this work?" before the question is even asked.
+Design system solves creating one shared language
+Design <> Development
+Single source of truth
 
-For Vusion, this matters beyond aesthetics. Our products help people make sense of complex retail data. When the interface is inconsistent or unpredictable, it creates cognitive friction that gets in the way of insight. A coherent system directly supports our commitment to human-centered technologies.
 -->
 
 ---
@@ -65,7 +73,7 @@ For Vusion, this matters beyond aesthetics. Our products help people make sense 
 
 # A Design System at scale is a **socio-technical system**
 
-<div class="grid">
+<div class="grid mt-4">
 <div class="card"><h3>01 · Design</h3><p>Primitives, accessible, composable.</p></div>
 <div class="card"><h3>02 · Contracts</h3><p>Tokens, props, slots, events, states.</p></div>
 <div class="card"><h3>03 · Validation</h3><p>Stories, interaction, a11y, visual, CI.</p></div>
@@ -75,7 +83,9 @@ For Vusion, this matters beyond aesthetics. Our products help people make sense 
 <blockquote class="mt-7">The value is not in a component library. It is in reducing the cost of change for teams.</blockquote>
 
 <!--
-Notes : The panel should take away: start from reality, reason in contracts, distinguish React architecture from platform architecture, treat quality as a continuous flow, and own the trade-offs.
+
+socio-technical system = a framework that looks at how people, culture, and social structures interact with tools, software, and physical infrastructure in a workplace or society.
+The concept was developed during World War II by Eric Trist, Ken Bamforth, and Fred Emery at the Tavistock Institute while studying English coal miners
 
 
 Primitives for common language
@@ -95,7 +105,7 @@ Monitor adoption and get feedback to reduce friction
 
 # Establish design principles
 
-<div class="grid">
+<div class="grid mt-4">
 <div class="card"><h3>Serve the user, not the screen</h3><p>Optimize clarity, speed and confidence.</p></div>
 <div class="card"><h3>Personality lives in the system</h3><p>Visual identity through color palette, icons, typography and spatial rhythm.</p></div>
 <div class="card"><h3>Constraints are the product</h3><p>Work with the system, not around it.</p></div>
@@ -103,24 +113,37 @@ Monitor adoption and get feedback to reduce friction
 </div>
 
 <!--
-Serve the user
+Serve the user, not the screen
 
-When a design decision feels clever but adds friction, it is wrong. When a component is technically elegant but harder to understand, it is wrong. The retail manager at the end of the chain is always the final judge.
+Don't want to add friction to the user.
+Elegant Component, but harder to understand, is wrong.
 
 Personality
 
-Designing or building outside the system doesn't add character — it breaks it. Custom styles and one-off components don't express creativity, they create inconsistency that the user pays for.
+Designing or building outside the system doesn't add character — it breaks it.
+Custom styles and one-shot components don't express creativity, they create inconsistency that the user pays for.
 
 Constraints
 
-The system is intentionally restrictive. Developers cannot apply arbitrary styles. Designers cannot use components that don't exist in the library. This is not a limitation — it is the mechanism by which quality scales.
+The system is intentionally restrictive.
+Developers cannot apply arbitrary styles.
+Designers cannot use components that don't exist in the library.
 
-Every constraint exists to protect the experience at the end of the chain. When the system feels too rigid, the right answer is to improve the system — not to work around it.
+This is not a limitation — it is the mechanism by which quality scales.
+
+Every constraint exists to protect the experience at the end of the chain. 
+
+When the system feels too rigid, the right answer is to improve the system — not to work around it.
 
 Acessibility
 
 The interface and the components must be predictible.
-Accessibility and reliability are not features to be added later — they are baseline qualities baked into every component so teams never have to solve for them individually. A component that is not accessible is not finished.
+
+Accessibility and reliability are not features to be added later.
+They are baseline qualities set into every component so teams never have to solve for them individually.
+
+A component that is not accessible is not finished.
+
 -->
 
 ---
@@ -146,6 +169,26 @@ flowchart LR
 > Anyone can contribute to Spectra, but must follow the decision path before any implementation and should be challenged by one member of the design system team.
 
 </div>
+
+<!--
+
+Idea
+
+=> Does the component already exist, with the same behavior?
+YES => Use the existing component
+
+NO => Can an existing component cover it with a variant?
+YES => Create new component variant
+
+NO => Is this specific to one project or is it a short-term edge case?
+YES => Create component inside your app
+
+NO => Would other teams benefit from it?
+YES => Create new component
+
+NO => Create component inside your app
+
+-->
 
 ---
 
@@ -307,9 +350,14 @@ Useful boundary: Govern the structure, states, and accessibility; expose intenti
 
 All components should export their types
 
-Strict typing, without `any` allowed
+**Strict typing**, without `any` allowed
 
 ESlint rules to align everyones code
+
+Predictable defaults for quick adoption
+
+
+**Radix UI**
 
 -->
 
@@ -436,8 +484,22 @@ Show a packages dependencies graph
 <div class="card"><h3>The caveat to state</h3><p>An accessible primitive does not automatically make the product accessible. Test the accessible name, focus order, announcements, contrast, and real-world scenarios.</p></div>
 </div>
 
-<!-- Notes : Radix is one implementation choice inside Spectra; the durable principle is to rely on proven interaction primitives and validate their behavior independently.
-Radix doesn't provide every accessibility solution, we still have to validate focus order, announce texts, contrats and content in real scenarii. But Radix provide the right behavior for critical interactions without needing to reimplement them. -->
+<!-- 
+
+Radix is headless and provides all accessibility primitives for keyboard interfaction, focus, aria attributes and interactive states.
+
+Styling through Tailwind and tokens.
+
+BUT Radix doesn't provide every accessibility solution
+We still have to :
+- validate focus order
+- announce textes
+- color contrats
+- content in real scenarios
+
+Radix provide the right behavior for critical interactions without needing to reimplement them.
+
+-->
 
 ---
 
@@ -555,7 +617,13 @@ flowchart LR
 
 <img src="/public/design-system-adoption.png" width="100%" />
 
-<!-- Notes : Emphasize QA and peer QA, not just automation. Adoption is a Design System metric just like code quality. -->
+<!-- 
+
+Emphasize QA and peer QA, not just automation.
+
+Adoption is a Design System metric just like code quality.
+
+-->
 
 ---
 
@@ -572,9 +640,13 @@ flowchart LR
 <div class="card"><h3>6 · Adoption</h3><p class="small">Coverage, active versions, overrides and regressions.</p></div>
 </div>
 
-<!-- Notes : Keep this grounded in Vusion. Governance should protect autonomy rather than centralize every decision: the platform team owns invariants, while product teams bring context and evidence.
+<!-- 
 
-Governance is not an administrative layer above technology: it is how the system stays trustworthy while it evolves. -->
+Governance should protect autonomy rather than centralize every decision: the platform team owns invariants, while product teams bring context and evidence.
+
+Governance is not an administrative layer above technology: it is how the system stays trustworthy while it evolves.
+
+-->
 
 ---
 
@@ -598,8 +670,6 @@ Governance is not an administrative layer above technology: it is how the system
 Product need → typed API → slots + events + tokens → reproductible story → keyboard / a11y / visual tests 
 → package → application rollout → measured feedback
 ```
-
-<!-- Notes : This is a compact demonstration of the Spectra method. Start with the user need, then define role, states, composition, events, and accessibility behavior. Show how the contract becomes a Storybook story, interaction test, visual review, and documented package API. The point is not the banner itself; it is the reasoning pattern. -->
 
 ---
 layout: cover
