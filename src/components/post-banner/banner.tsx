@@ -168,7 +168,7 @@ export class PostBanner {
               </div>
             </div>
             {this.dismissible && (
-              <button class="swisspost:close" type="button" aria-label={this.closeLabel} onClick={this.dismiss}>
+              <button class="swisspost:close" type="button" onClick={this.dismiss}>
                 <span aria-hidden="true">&times;</span>
               </button>
             )}
